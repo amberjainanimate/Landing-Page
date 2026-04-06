@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumos Productions</title>
+    <style>
+        /* Base Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: rgba(10, 10, 10, 0.95);
+            position: fixed;
+            width: 80%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #bbb;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url("images/Banner.jpg") center/cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            background-color: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #ddd;
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            background-color: #111;
+        }
+
+        .feature-card {
+            padding: 30px;
+            border: 1px solid #222;
+            border-radius: 10px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            border-color: #555;
+            background-color: #1a1a1a;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            flex-grow: 1; 
+        }
+
+        /* Showcase CSS */
+        .showcase-placeholder {
+            margin-top: 25px;
+            width: 100%;
+            height: 200px;
+            background-color: #0a0a0a;
+            border: 2px dashed #ff0000;
+            color: #ff0000;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        /* Forces images, videos, and iframes to fit perfectly */
+.showcase-placeholder img,
+.showcase-placeholder video,
+.showcase-placeholder iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: 10; 
+    border-radius: 3px;
+    cursor: pointer; 
+    transition: transform 0.3s ease;
+    border: none; /* Removes default iframe borders */
+}
+
+        .showcase-placeholder img:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* --- NEW ADDITION: LIGHTBOX MODAL CSS --- */
+        .lightbox-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000; /* Stays on top of everything */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+            backdrop-filter: blur(5px); /* Cinematic blur effect */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            animation: zoomIn 0.3s ease; /* Smooth entrance */
+        }
+
+        @keyframes zoomIn {
+            from {transform: scale(0.9); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #ff0000; /* Red on hover to match brand */
+        }
+        /* --- END LIGHTBOX CSS --- */
+
+        /* Enquiry Form Section */
+        .contact-section {
+            padding: 100px 10%;
+            background-color: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .contact-header h2 {
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .enquiry-form {
+            width: 100%;
+            max-width: 600px;
+            background: #151515;
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #222;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: 0.3s;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #fff;
+            background: #2a2a2a;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #ddd;
+            letter-spacing: 2px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 10%;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+ <nav>
+        <div class="logo">Lumos Production</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+ </nav>
+
+    <section class="hero" id="home">
+        <h1>VISION ENGINEERED.</h1>
+        <p>From the initial concept to the final cut, we manufacture cinematic reality with uncompromising precision.</p>
+        <a href="#contact" class="cta-button">Initiate Project</a>
+    </section>
+
+    <section class="features" id="features">
+        <div class="feature-card">
+            <h3>High-Impact Poster Design</h3>
+            <p>Commanding visual narratives engineered to capture immediate attention and communicate your core message effectively across both physical and digital mediums.</p>
+            
+            <div class="showcase-placeholder">
+                <img src="images/Artboard.png" width="2716" height="3736" alt=""/>
+          </div>
+            
+        </div>
+        <div class="feature-card">
+            <h3>Kinetic Typography Engine</h3>
+            <p>Precision-engineered motion text that breathes life into your brand identity, delivering your core message with dynamic, kinetic impact.</p>
+            
+            <div class="showcase-placeholder">
+                <div class="ratio ratio-16x9 my-4">
+    <video controls autoplay muted loop>
+        <source src="images/Video.mp4" type="video/mp4">
+    </video>
+</div>
+            </div>
+            
+        </div>
+        <div class="feature-card">
+            <h3>Digital Asset Architecture</h3>
+            <p>Engineering high-fidelity 3D assets with surgical precision, tailored for seamless integration into cinematic productions, architectural visualizations, and interactive environments.</p>
+            
+            <div class="showcase-placeholder">
+            <img src="images/IMG.jpg" alt=""/> </div>
+            
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="contact-header">
+            <h2>WORK ENQUIRY</h2>
+            <p>Tell me about your vision, and we shall make it a reality.</p>
+        </div>
+        
+        <form class="enquiry-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Sir/Ma'am Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="email@domain.com" required>
+            </div>
+            <div class="form-group">
+                <label for="service-type">Required Discipline</label>
+                <select id="service-type" name="service-type">
+                    <option value="branding">Poster Design</option>
+                    <option value="uiux">Title Animation </option>
+                    <option value="print">3D Modelling</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Project Brief</label>
+                <textarea id="message" name="message" rows="5" placeholder="Describe the mission..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Enquiry</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Lumos Production. All systems operational.</p>
+    </footer>
+
+    <div id="imageModal" class="lightbox-modal">
+        <span class="close-modal">&times;</span>
+        <img class="lightbox-content" id="expandedImg">
+    </div>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var modal = document.getElementById("imageModal");
+            var expandedImg = document.getElementById("expandedImg");
+            var closeModalBtn = document.querySelector(".close-modal");
+
+            // Attach click event to all images inside the showcase containers
+            var showcaseImages = document.querySelectorAll(".showcase-placeholder img");
+            
+            showcaseImages.forEach(function(img) {
+                img.addEventListener("click", function() {
+                    modal.style.display = "flex";
+                    expandedImg.src = this.src; // Copy the clicked image source to the modal
+                });
+            });
+
+            // Close the modal when the 'X' is clicked
+            closeModalBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+
+            // Close the modal if the user clicks anywhere in the dark background
+            modal.addEventListener("click", function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
